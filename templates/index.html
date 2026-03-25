@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{{ gym_name }} — Transform your body with certified trainers, modern equipment, and personalised diet guidance. Book a free trial today!" />
+    <title>{{ gym_name }} | Transform Your Body</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+    <!-- ── NAVBAR ────────────────────────────────────────── -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">🏋️ <span>{{ gym_name }}</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="{{ 'https://wa.me/' ~ wa_number ~ '?text=' ~ wa_message | urlencode }}" class="nav-cta" target="_blank" rel="noopener">Book Free Trial</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ── HERO ──────────────────────────────────────────── -->
+    <section class="hero" id="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <p class="hero-tag">🔥 Only <strong>10 spots left</strong> this month</p>
+            <h1>Transform Your Body<br />at <span class="accent">{{ gym_name }}</span></h1>
+            <p class="hero-sub">Fat Loss &nbsp;•&nbsp; Muscle Gain &nbsp;•&nbsp; Personal Training</p>
+            <p class="hero-location">📍 {{ gym_location }}</p>
+            <a href="{{ 'https://wa.me/' ~ wa_number ~ '?text=' ~ wa_message | urlencode }}" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+                Book Free Trial &rarr;
+            </a>
+            <p class="hero-micro">No commitment. No registration fee.</p>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- ── BENEFITS ──────────────────────────────────────── -->
+    <section class="section benefits" id="benefits">
+        <div class="container">
+            <h2 class="section-title">Why Choose <span class="accent">{{ gym_name }}</span>?</h2>
+            <p class="section-sub">Everything you need to crush your fitness goals — under one roof.</p>
+            <div class="benefits-grid">
+                {% for b in benefits %}
+                <div class="benefit-card" data-aos>
+                    <div class="benefit-icon">{{ b.icon }}</div>
+                    <h3>{{ b.title }}</h3>
+                    <p>{{ b.desc }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PRICING ───────────────────────────────────────── -->
+    <section class="section pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple, Transparent <span class="accent">Pricing</span></h2>
+            <p class="section-sub">Pick the plan that fits your goals. Upgrade or cancel anytime.</p>
+            <div class="pricing-grid">
+                {% for plan in plans %}
+                <div class="pricing-card{% if plan.popular %} popular{% endif %}" data-aos>
+                    {% if plan.popular %}
+                    <div class="popular-badge">⭐ Most Popular</div>
+                    {% endif %}
+                    <h3 class="plan-name">{{ plan.name }}</h3>
+                    <div class="plan-price">{{ plan.price }}<span>{{ plan.period }}</span></div>
+                    <ul class="plan-features">
+                        {% for f in plan.features %}
+                        <li>✓ {{ f }}</li>
+                        {% endfor %}
+                    </ul>
+                    <a href="{{ 'https://wa.me/' ~ wa_number ~ '?text=' ~ ('Hi, I want to join the ' ~ plan.name ~ ' plan at ' ~ gym_name) | urlencode }}" class="btn {% if plan.popular %}btn-primary{% else %}btn-outline{% endif %}" target="_blank" rel="noopener">
+                        Choose {{ plan.name }}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <p class="urgency-text">🔥 Limited seats available — lock in your spot now!</p>
+        </div>
+    </section>
+
+    <!-- ── GALLERY ───────────────────────────────────────── -->
+    <section class="section gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Take a <span class="accent">Look Inside</span></h2>
+            <p class="section-sub">State-of-the-art facility designed for serious results.</p>
+            <div class="gallery-grid">
+                {% for img in gallery %}
+                <div class="gallery-item" data-aos>
+                    <img src="{{ url_for('static', filename='images/' ~ img.src) }}" alt="{{ img.alt }}" loading="lazy" />
+                    <div class="gallery-overlay">
+                        <span>{{ img.alt }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ── TESTIMONIALS ──────────────────────────────────── -->
+    <section class="section testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Real People. <span class="accent">Real Results.</span></h2>
+            <p class="section-sub">Don't just take our word for it.</p>
+            <div class="testimonials-grid">
+                {% for t in testimonials %}
+                <div class="testimonial-card" data-aos>
+                    <div class="testimonial-stars">{% for _ in range(t.stars) %}⭐{% endfor %}</div>
+                    <p class="testimonial-text">"{{ t.text }}"</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-avatar">{{ t.name[0] }}</div>
+                        <div>
+                            <strong>{{ t.name }}</strong>
+                            <span class="testimonial-result">{{ t.result }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ── LOCATION ───────────────────────────────────────── -->
+    <section class="section location" id="location">
+        <div class="container">
+            <h2 class="section-title">Find <span class="accent">Us Here</span></h2>
+            <p class="section-sub">📍 {{ gym_location }}</p>
+            <div class="map-wrapper" data-aos>
+                <iframe
+                    src="{{ maps_embed }}"
+                    width="100%"
+                    height="400"
+                    style="border:0; border-radius: 14px;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <a href="{{ maps_link }}" class="btn btn-outline" target="_blank" rel="noopener" style="margin-top: 24px;">
+                📍 Get Directions on Google Maps
+            </a>
+        </div>
+    </section>
+
+    <!-- ── FINAL CTA ─────────────────────────────────────── -->
+    <section class="section final-cta" id="final-cta">
+        <div class="container final-cta-inner">
+            <h2>Start Your Fitness Journey <span class="accent">Today</span></h2>
+            <p>Join hundreds who already transformed their bodies at {{ gym_name }}. Your first session is on us.</p>
+            <a href="{{ 'https://wa.me/' ~ wa_number ~ '?text=' ~ wa_message | urlencode }}" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+                💬 Chat on WhatsApp Now
+            </a>
+            <p class="hero-micro">Instant reply. No spam. No pressure.</p>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ────────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>&copy; 2026 {{ gym_name }}. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#hero">Home</a>
+                <a href="#benefits">Benefits</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#location">Location</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ── FLOATING WHATSAPP BUTTON ──────────────────────── -->
+    <a href="{{ 'https://wa.me/' ~ wa_number ~ '?text=' ~ wa_message | urlencode }}" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" id="whatsappFloat">
+        <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.5 1.128 6.744 3.046 9.378L1.054 31.2l6.048-1.94a15.9 15.9 0 008.902 2.7C24.828 31.96 32 24.784 32 16.004S24.828 0 16.004 0zm9.35 22.618c-.394 1.11-1.946 2.034-3.2 2.304-.86.182-1.98.328-5.754-1.238-4.832-2.004-7.94-6.904-8.18-7.224-.232-.32-1.94-2.584-1.94-4.928s1.228-3.496 1.664-3.974c.436-.478.952-.598 1.27-.598.316 0 .63.002.906.016.29.014.68-.11 1.064.812.394.948 1.342 3.272 1.46 3.512.118.24.198.518.04.836-.158.32-.238.518-.478.798-.24.28-.504.626-.72.84-.24.238-.49.496-.21.972.278.478 1.238 2.042 2.66 3.31 1.826 1.632 3.366 2.138 3.844 2.376.478.24.756.2 1.034-.118.278-.32 1.194-1.39 1.512-1.868.32-.478.636-.398 1.074-.238.436.158 2.76 1.302 3.236 1.54.478.238.796.356.914.554.118.198.118 1.148-.276 2.258z"/></svg>
+    </a>
+
+    <!-- ── STICKY MOBILE CTA ─────────────────────────────── -->
+    <div class="sticky-cta" id="stickyCta">
+        <a href="{{ 'https://wa.me/' ~ wa_number ~ '?text=' ~ wa_message | urlencode }}" class="btn btn-primary btn-block" target="_blank" rel="noopener">
+            💬 Book Free Trial on WhatsApp
+        </a>
+    </div>
+
+    <!-- ── SCRIPT ────────────────────────────────────────── -->
+    <script>
+        // ─ Navbar scroll effect ─
+        const navbar = document.getElementById('navbar');
+        const stickyCta = document.getElementById('stickyCta');
+        const hero = document.getElementById('hero');
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY > 60;
+            navbar.classList.toggle('scrolled', scrolled);
+
+            // Show sticky CTA after hero
+            const heroBottom = hero.getBoundingClientRect().bottom;
+            stickyCta.classList.toggle('visible', heroBottom < 0);
+        });
+
+        // ─ Mobile menu toggle ─
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Close menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        // ─ Intersection Observer for scroll animations ─
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
+
+        // ─ Smooth scrolling for anchor links ─
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

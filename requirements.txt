@@ -1,4 +1,2 @@
 app.py
 requirements.txt
-templates/
-static/

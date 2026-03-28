@@ -13,7 +13,291 @@ GOOGLE_MAPS_EMBED = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.
 # Pricing plans
 PLANS = [
     {
-        "name": "Basic",
+        "name": "Basic",<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ gym_name }} — {{ gym_city }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="noise"></div>
+
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <div class="logo">{{ gym_name | upper }}</div>
+        <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}"
+           class="btn-nav" target="_blank">Book Free Trial →</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg-text">FIT</div>
+    <div class="container">
+        <div class="hero-badge">✅ Trusted by 500+ members in {{ gym_city }}</div>
+        <h1 class="hero-title">
+            Join {{ gym_city }}'s Most<br>
+            <span class="accent">Result-Driven Gym</span>
+        </h1>
+        <p class="hero-sub">
+            Certified trainers, modern equipment &amp; real results.<br>
+            Start your free trial today.
+        </p>
+        <p class="power-line">"Even 1 workout can change your routine — try free for 3 days."</p>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-num">500+</span>
+                <span class="stat-label">Active members</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">4.6 ⭐</span>
+                <span class="stat-label">Google · 200+ reviews</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">3</span>
+                <span class="stat-label">Day free trial</span>
+            </div>
+        </div>
+
+        <div class="hero-cta">
+            <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}"
+               class="btn-primary" target="_blank">
+                <span class="wa-icon">💬</span> Book Free Trial on WhatsApp (Instant Reply)
+            </a>
+            <p class="cta-note">⚡ Only 7 trial slots left this week</p>
+        </div>
+    </div>
+    <div class="hero-scroll-hint">↓ SCROLL</div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+    <div class="container">
+        <div class="section-label">HOW IT WORKS</div>
+        <h2 class="section-title">Join in 3 Simple Steps</h2>
+        <div class="steps">
+            <div class="step" data-step="01">
+                <div class="step-icon">💬</div>
+                <h3>Message Us</h3>
+                <p>Tap WhatsApp → Get instant reply from a trainer. No waiting, no forms.</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step" data-step="02">
+                <div class="step-icon">🎯</div>
+                <h3>Visit for Free</h3>
+                <p>Come in for a free 3-day trial — see the gym, meet the trainers, feel the vibe</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step" data-step="03">
+                <div class="step-icon">💪</div>
+                <h3>Start Transforming</h3>
+                <p>Pick your plan, lock in your spot, and start your fitness journey the very next day</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PLANS -->
+<section class="plans-section">
+    <div class="container">
+        <div class="section-label">MEMBERSHIP</div>
+        <h2 class="section-title">Simple. Affordable. Results.</h2>
+        <p class="plans-intro">Plans starting at just ₹999/month — no hidden charges</p>
+        <div class="plans">
+            <div class="plan">
+                <div class="plan-tag">STARTER</div>
+                <div class="plan-price">₹999<span>/mo</span></div>
+                <ul class="plan-perks">
+                    <li>✓ Full gym access</li>
+                    <li>✓ Locker room</li>
+                    <li>✓ Basic equipment</li>
+                    <li>✓ Group sessions</li>
+                </ul>
+                <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}%20(Starter%20Plan)"
+                   class="btn-plan" target="_blank">Book Free Trial on WhatsApp</a>
+            </div>
+            <div class="plan plan-featured">
+                <div class="plan-badge">MOST POPULAR</div>
+                <div class="plan-tag">PRO</div>
+                <div class="plan-price">₹1,999<span>/mo</span></div>
+                <ul class="plan-perks">
+                    <li>✓ Everything in Basic</li>
+                    <li>✓ Diet consultation</li>
+                    <li>✓ Trainer check-ins</li>
+                    <li>✓ Progress tracking</li>
+                </ul>
+                <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}%20(Pro%20Plan)"
+                   class="btn-plan btn-plan-featured" target="_blank">Book Free Trial on WhatsApp</a>
+            </div>
+            <div class="plan">
+                <div class="plan-tag">ELITE</div>
+                <div class="plan-price">₹3,999<span>/mo</span></div>
+                <ul class="plan-perks">
+                    <li>✓ Personal trainer</li>
+                    <li>✓ Custom meal plan</li>
+                    <li>✓ Weekly check-ins</li>
+                    <li>✓ Body composition</li>
+                </ul>
+                <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}%20(Elite%20Plan)"
+                   class="btn-plan" target="_blank">Book Free Trial on WhatsApp</a>
+            </div>
+        </div>
+        <p class="plans-note">⚡ Only <strong>7 trial slots</strong> left this week</p>
+    </div>
+</section>
+
+<!-- FREE TRIAL CTA BLOCK -->
+<section class="lead-section">
+    <div class="container">
+        <div class="lead-box lead-box-centered">
+            <div class="section-label">FREE TRIAL</div>
+            <h2>Try 3 Days. Zero Risk.</h2>
+            <p>No commitment. No contract. Just show up, work out, and decide after.</p>
+            <div class="lead-benefits">
+                <span>✓ Free 3-day trial visit</span>
+                <span>✓ No paperwork</span>
+                <span>✓ Instant WhatsApp reply</span>
+            </div>
+            <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}"
+               class="btn-primary" target="_blank" style="margin-top: 28px;">
+                <span class="wa-icon">💬</span> Book Free Trial on WhatsApp (Instant Reply)
+            </a>
+            <p class="cta-note" style="margin-top: 12px;">⚡ Only 7 trial slots left this week</p>
+        </div>
+    </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits-section">
+    <div class="container">
+        <div class="section-label">WHY US</div>
+        <h2 class="section-title">Built Different</h2>
+        <div class="benefits-grid">
+            <div class="benefit">
+                <div class="benefit-icon">🏋️</div>
+                <h3>Certified Trainers</h3>
+                <p>Every trainer is certified with real experience in body transformation</p>
+            </div>
+            <div class="benefit">
+                <div class="benefit-icon">📊</div>
+                <h3>Progress Tracking</h3>
+                <p>Monthly measurements, photos, and reports so you see real results</p>
+            </div>
+            <div class="benefit">
+                <div class="benefit-icon">🥗</div>
+                <h3>Diet Guidance</h3>
+                <p>Custom meal plans aligned with your fitness goals and budget</p>
+            </div>
+            <div class="benefit">
+                <div class="benefit-icon">⚡</div>
+                <h3>Modern Equipment</h3>
+                <p>Latest machines maintained regularly — no outdated, broken gear</p>
+            </div>
+            <div class="benefit">
+                <div class="benefit-icon">🕐</div>
+                <h3>Flexible Hours</h3>
+                <p>Early mornings to late evenings — fits your college or work schedule</p>
+            </div>
+            <div class="benefit">
+                <div class="benefit-icon">💬</div>
+                <h3>WhatsApp Support</h3>
+                <p>Ask questions anytime. Your trainer replies on WhatsApp directly</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-label">RESULTS</div>
+        <h2 class="section-title">Real People. Real Results.</h2>
+        <div class="testimonials">
+            <div class="testi">
+                <div class="testi-stars">★★★★★</div>
+                <p>"Lost 9kg in 3 months. The trainers here actually care about your progress. Best decision I made."</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">RK</div>
+                    <div>
+                        <strong>Rahul K.</strong>
+                        <span>Lost 9kg • 3 months</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testi">
+                <div class="testi-stars">★★★★★</div>
+                <p>"Gained 5kg muscle in 4 months with their Elite plan. Diet plan + trainer = game changer."</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">AS</div>
+                    <div>
+                        <strong>Arjun S.</strong>
+                        <span>Gained 5kg muscle • 4 months</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testi">
+                <div class="testi-stars">★★★★★</div>
+                <p>"Joined through WhatsApp, got a reply in minutes. Started next day. No BS, just results."</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">PM</div>
+                    <div>
+                        <strong>Priya M.</strong>
+                        <span>Member since 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+    <div class="container">
+        <div class="cta-bg-text">NOW</div>
+        <h2>Stop Waiting.<br>Start Today.</h2>
+        <p>Every day you delay is a day your body doesn't change.</p>
+        <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}"
+           class="btn-primary btn-large" target="_blank">
+            💬 Book Free Trial on WhatsApp (Instant Reply)
+        </a>
+        <p class="urgency">⚡ Only 7 trial slots left this week</p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="logo">{{ gym_name | upper }}</div>
+            <p>{{ gym_city }}, India</p>
+            <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="footer-wa">
+                💬 Chat on WhatsApp
+            </a>
+        </div>
+        <p class="footer-copy">© {{ year }} {{ gym_name }}. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}"
+   class="wa-float" target="_blank">
+    <span class="wa-float-icon">💬</span>
+    <span class="wa-float-text">Chat on WhatsApp</span>
+</a>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+
         "price": "₹999",
         "period": "/month",
         "features": [

@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 # Config - change these
-GYM_NAME = "VIEWSONIC FITNESS"
+GYM_NAME = "YOUR GYM NAME"
 GYM_CITY = "Jaipur"
 GYM_WHATSAPP = "917877169982"  # country code + number, no +
 GYM_TAGLINE = "Get 10+ New Members Every Month"

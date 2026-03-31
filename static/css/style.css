@@ -124,6 +124,26 @@ body {
     position: relative;
     padding: 120px 0 80px;
     overflow: hidden;
+    background: url('/static/images/hero-bg.png') center/cover no-repeat;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        105deg,
+        rgba(8, 8, 8, 0.92) 0%,
+        rgba(8, 8, 8, 0.78) 40%,
+        rgba(8, 8, 8, 0.55) 70%,
+        rgba(8, 8, 8, 0.35) 100%
+    );
+    z-index: 1;
+}
+
+.hero > * {
+    position: relative;
+    z-index: 2;
 }
 
 .hero::before {
@@ -131,8 +151,9 @@ body {
     position: absolute;
     top: -200px; right: -200px;
     width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(232, 50, 26, 0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(232, 50, 26, 0.18) 0%, transparent 70%);
     pointer-events: none;
+    z-index: 2;
 }
 
 .hero-bg-text {
@@ -141,10 +162,11 @@ body {
     transform: translateY(-50%);
     font-family: var(--font-display);
     font-size: min(30vw, 320px);
-    color: rgba(255,255,255,0.02);
+    color: rgba(255,255,255,0.03);
     line-height: 1;
     pointer-events: none;
     user-select: none;
+    z-index: 2;
 }
 
 .hero-badge {
@@ -421,6 +443,22 @@ body {
 .lead-section {
     padding: 72px 0;
     border-top: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    background: url('/static/images/section-bg.png') center/cover no-repeat fixed;
+}
+
+.lead-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 8, 8, 0.88);
+    z-index: 0;
+}
+
+.lead-section > * {
+    position: relative;
+    z-index: 1;
 }
 
 .lead-box-centered {
@@ -558,6 +596,20 @@ body {
     position: relative;
     overflow: hidden;
     border-top: 1px solid var(--border);
+    background: url('/static/images/training-bg.png') center/cover no-repeat fixed;
+}
+
+.final-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 8, 8, 0.82);
+    z-index: 0;
+}
+
+.final-cta > * {
+    position: relative;
+    z-index: 1;
 }
 
 .final-cta::before {
@@ -566,8 +618,9 @@ body {
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(232,50,26,0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(232,50,26,0.15) 0%, transparent 70%);
     pointer-events: none;
+    z-index: 1;
 }
 
 .cta-bg-text {
@@ -712,4 +765,16 @@ body {
     .benefits-grid { grid-template-columns: 1fr; }
     .hero-title { font-size: clamp(2.5rem, 10vw, 4rem); }
     .hero-bg-text { display: none; }
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
 }

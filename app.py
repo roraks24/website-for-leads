@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from datetime import datetime
 
 app = Flask(__name__)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 # Config - change these
 GYM_NAME = "VIEWSONIC FITNESS"

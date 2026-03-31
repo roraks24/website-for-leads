@@ -4,9 +4,9 @@ from datetime import datetime
 app = Flask(__name__)
 
 # Config - change these
-GYM_NAME = "PowerFit Gym"
+GYM_NAME = "VIEWSONIC FITNESS"
 GYM_CITY = "Jaipur"
-GYM_WHATSAPP = "919999999999"  # country code + number, no +
+GYM_WHATSAPP = "917877169982"  # country code + number, no +
 GYM_TAGLINE = "Get 10+ New Members Every Month"
 
 @app.route("/")

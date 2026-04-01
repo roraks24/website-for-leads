@@ -3,280 +3,478 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ gym_name }} — {{ gym_city }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>{{ gym_name }} — Best Gym in {{ gym_city }}</title>
+    <meta name="description" content="{{ gym_name }} in {{ gym_city }} — Modern equipment, certified trainers & physiotherapy. Open Mon–Sat, 6 AM–10 PM. Book a free trial today!">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body data-theme="dark">
 
-<div class="noise"></div>
-
-<!-- NAV -->
-<nav class="nav">
+<!-- ===================== NAVBAR ===================== -->
+<nav class="nav" id="navbar">
     <div class="nav-inner">
-        <div class="logo">{{ gym_name | upper }}</div>
+        <div class="logo">
+            <span class="logo-icon">⚡</span>
+            <span class="logo-text">{{ gym_name_short | upper }}</span>
+        </div>
+        <div class="nav-links">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="#plans" class="nav-link">Plans</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme" title="Toggle light/dark mode">
+                <span class="theme-icon-dark">🌙</span>
+                <span class="theme-icon-light">☀️</span>
+            </button>
+            <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}"
+               class="btn-cta" target="_blank" id="nav-cta">Join Now</a>
+        </div>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#plans" class="mobile-link">Plans</a>
+        <a href="#contact" class="mobile-link">Contact</a>
         <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}"
-           class="btn-nav" target="_blank">Book Free Trial →</a>
+           class="btn-cta mobile-cta" target="_blank">Book Free Trial →</a>
     </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="hero-bg-text">FIT</div>
-    <div class="container">
-        <div class="hero-badge">✅ Trusted by 500+ members in {{ gym_city }}</div>
-        <h1 class="hero-title">
-            Join {{ gym_city }}'s Most<br>
-            <span class="accent">Result-Driven Gym</span>
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-bg-word">STRONG</div>
+    <div class="container hero-content">
+        <div class="hero-eyebrow animate-hero">
+            <span class="eyebrow-dot"></span>
+            {{ gym_city }}'s Premier Fitness Destination
+        </div>
+        <h1 class="hero-title animate-hero">
+            TRANSFORM YOUR BODY,<br>
+            <span class="hero-accent">TRANSFORM YOUR LIFE</span>
         </h1>
-        <p class="hero-sub">
-            Certified trainers, modern equipment &amp; real results.<br>
-            Start your free trial today.
+        <p class="hero-sub animate-hero">
+            Modern equipment · Certified trainers · Physiotherapy<br>
+            Join {{ members }} members already living their best life.
         </p>
-        <p class="power-line">"Even 1 workout can change your routine — try free for 3 days."</p>
-
-        <div class="hero-stats">
-            <div class="stat">
-                <span class="stat-num">500+</span>
-                <span class="stat-label">Active members</span>
+        <div class="hero-stats animate-hero">
+            <div class="stat-item">
+                <span class="stat-val">{{ members }}</span>
+                <span class="stat-lbl">Active Members</span>
             </div>
-            <div class="stat-divider"></div>
-            <div class="stat">
-                <span class="stat-num">4.6 ⭐</span>
-                <span class="stat-label">Google · 200+ reviews</span>
+            <div class="stat-sep"></div>
+            <div class="stat-item">
+                <span class="stat-val">{{ rating }}★</span>
+                <span class="stat-lbl">Google Rating</span>
             </div>
-            <div class="stat-divider"></div>
-            <div class="stat">
-                <span class="stat-num">3</span>
-                <span class="stat-label">Day free trial</span>
+            <div class="stat-sep"></div>
+            <div class="stat-item">
+                <span class="stat-val">Mon–Sat</span>
+                <span class="stat-lbl">6AM – 10PM</span>
             </div>
         </div>
-
-        <div class="hero-cta">
+        <div class="hero-buttons animate-hero">
             <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}"
-               class="btn-primary" target="_blank">
-                <span class="wa-icon">💬</span> Book Free Trial on WhatsApp (Instant Reply)
+               class="btn-primary" target="_blank" id="hero-cta">
+                💬 Book Free Trial
             </a>
-            <p class="cta-note">⚡ Only 7 trial slots left this week</p>
+            <a href="#plans" class="btn-ghost">View Plans →</a>
         </div>
+        <p class="hero-urgency animate-hero">⚡ Only 7 trial slots left this week</p>
     </div>
-    <div class="hero-scroll-hint">↓ SCROLL</div>
+    <div class="hero-scroll">↓ SCROLL</div>
 </section>
 
-<!-- HOW IT WORKS -->
+<!-- ===================== ABOUT ===================== -->
+<section class="about-section" id="about">
+    <div class="container">
+        <div class="about-grid" id="about-grid">
+            <div class="about-text aos-fade-right">
+                <div class="section-eyebrow">ABOUT US</div>
+                <h2 class="section-title">Your Best Version<br>Starts <span class="text-accent">Here.</span></h2>
+                <p class="about-desc">
+                    Nestled in the heart of Hasanpura, {{ gym_city }}, Natural Fitness Gym is built for people who are serious about results.
+                    Whether you're a beginner or a seasoned athlete, our team of certified trainers and physiotherapists will craft a plan that fits your lifestyle.
+                </p>
+                <div class="about-features">
+                    <div class="feature-item"><span class="feature-check">✓</span> Modern Strength & Cardio Equipment</div>
+                    <div class="feature-item"><span class="feature-check">✓</span> AC Facility &amp; Clean Environment</div>
+                    <div class="feature-item"><span class="feature-check">✓</span> In-House Physiotherapy</div>
+                    <div class="feature-item"><span class="feature-check">✓</span> Personal Trainer Available</div>
+                    <div class="feature-item"><span class="feature-check">✓</span> Restroom Facility</div>
+                    <div class="feature-item"><span class="feature-check">✓</span> Beginner Friendly</div>
+                </div>
+            </div>
+            <div class="about-stats-panel aos-fade-left">
+                <div class="stat-card">
+                    <div class="stat-card-num">500+</div>
+                    <div class="stat-card-label">Happy Members</div>
+                </div>
+                <div class="stat-card accent-card">
+                    <div class="stat-card-num">4.7★</div>
+                    <div class="stat-card-label">Google Rating</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-num">16h</div>
+                    <div class="stat-card-label">Open Daily (Mon–Sat)</div>
+                </div>
+                <div class="stat-card accent-card">
+                    <div class="stat-card-num">1</div>
+                    <div class="stat-card-label">Dedicated Physio</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="services-section" id="services">
+    <div class="container">
+        <div class="section-header aos-fade-up">
+            <div class="section-eyebrow">WHAT WE OFFER</div>
+            <h2 class="section-title">Services Built for <span class="text-accent">Results</span></h2>
+            <p class="section-sub">Everything you need under one roof to crush your fitness goals.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card aos-fade-up" style="--d:0ms">
+                <div class="service-icon-box">🏋️</div>
+                <h3>Weight Training</h3>
+                <p>Full free weights floor, power racks, barbells and machines for every muscle group.</p>
+            </div>
+            <div class="service-card aos-fade-up" style="--d:80ms">
+                <div class="service-icon-box">🏃</div>
+                <h3>Cardio Zone</h3>
+                <p>Modern treadmills, ellipticals and cycles to power your endurance training.</p>
+            </div>
+            <div class="service-card aos-fade-up" style="--d:160ms">
+                <div class="service-icon-box">🧑‍⚕️</div>
+                <h3>Physiotherapy</h3>
+                <p>In-house physiotherapist for injury recovery, pain relief and sports rehab.</p>
+            </div>
+            <div class="service-card aos-fade-up" style="--d:240ms">
+                <div class="service-icon-box">🎯</div>
+                <h3>Personal Training</h3>
+                <p>One-on-one sessions with certified trainers — custom plans, real accountability.</p>
+            </div>
+            <div class="service-card aos-fade-up" style="--d:320ms">
+                <div class="service-icon-box">🥗</div>
+                <h3>Diet & Nutrition</h3>
+                <p>Customized meal plans aligned with your body goals and budget.</p>
+            </div>
+            <div class="service-card aos-fade-up" style="--d:400ms">
+                <div class="service-icon-box">📊</div>
+                <h3>Progress Tracking</h3>
+                <p>Regular body measurements and progress check-ins to keep you on track.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
 <section class="how-section">
     <div class="container">
-        <div class="section-label">HOW IT WORKS</div>
-        <h2 class="section-title">Join in 3 Simple Steps</h2>
-        <div class="steps">
-            <div class="step" data-step="01">
-                <div class="step-icon">💬</div>
+        <div class="section-header aos-fade-up">
+            <div class="section-eyebrow">HOW IT WORKS</div>
+            <h2 class="section-title">Start Your Journey in <span class="text-accent">3 Steps</span></h2>
+        </div>
+        <div class="steps-row">
+            <div class="how-step aos-fade-up" style="--d:0ms">
+                <div class="how-step-num">01</div>
+                <div class="how-step-icon">💬</div>
                 <h3>Message Us</h3>
-                <p>Tap WhatsApp → Get instant reply from a trainer. No waiting, no forms.</p>
+                <p>WhatsApp us and get an instant reply from a trainer. No waiting, no complicated forms.</p>
             </div>
-            <div class="step-arrow">→</div>
-            <div class="step" data-step="02">
-                <div class="step-icon">🎯</div>
-                <h3>Visit for Free</h3>
-                <p>Come in for a free 3-day trial — see the gym, meet the trainers, feel the vibe</p>
+            <div class="how-arrow aos-fade-up" style="--d:100ms">→</div>
+            <div class="how-step aos-fade-up" style="--d:200ms">
+                <div class="how-step-num">02</div>
+                <div class="how-step-icon">🏋️</div>
+                <h3>Visit For Free</h3>
+                <p>Come in for a free trial — see the gym, meet your trainer, feel the energy.</p>
             </div>
-            <div class="step-arrow">→</div>
-            <div class="step" data-step="03">
-                <div class="step-icon">💪</div>
+            <div class="how-arrow aos-fade-up" style="--d:300ms">→</div>
+            <div class="how-step aos-fade-up" style="--d:400ms">
+                <div class="how-step-num">03</div>
+                <div class="how-step-icon">💪</div>
                 <h3>Start Transforming</h3>
-                <p>Pick your plan, lock in your spot, and start your fitness journey the very next day</p>
+                <p>Pick your plan, lock in your spot, and start your fitness journey the very next day.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- PLANS -->
-<section class="plans-section">
+<!-- ===================== PLANS ===================== -->
+<section class="plans-section" id="plans">
     <div class="container">
-        <div class="section-label">MEMBERSHIP</div>
-        <h2 class="section-title">Simple. Affordable. Results.</h2>
-        <p class="plans-intro">Plans starting at just ₹999/month — no hidden charges</p>
-        <div class="plans">
-            <div class="plan">
-                <div class="plan-tag">STARTER</div>
+        <div class="section-header aos-fade-up">
+            <div class="section-eyebrow">MEMBERSHIP</div>
+            <h2 class="section-title">Choose Your <span class="text-accent">Plan</span></h2>
+            <p class="section-sub">Transparent pricing. No hidden fees. Cancel anytime.</p>
+        </div>
+        <div class="plans-grid">
+            <!-- STARTER -->
+            <div class="plan-card aos-fade-up" style="--d:0ms">
+                <div class="plan-name">STARTER</div>
+                <div class="plan-duration">1 Month</div>
                 <div class="plan-price">₹999<span>/mo</span></div>
                 <ul class="plan-perks">
                     <li>✓ Full gym access</li>
                     <li>✓ Locker room</li>
-                    <li>✓ Basic equipment</li>
+                    <li>✓ Cardio & weights</li>
                     <li>✓ Group sessions</li>
                 </ul>
-                <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}%20(Starter%20Plan)"
-                   class="btn-plan" target="_blank">Book Free Trial on WhatsApp</a>
+                <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%27m%20interested%20in%20the%20Starter%20Plan%20at%20{{ gym_name | urlencode }}"
+                   class="btn-plan" target="_blank">Get Started</a>
             </div>
-            <div class="plan plan-featured">
+            <!-- PRO (featured) -->
+            <div class="plan-card plan-featured aos-fade-up" style="--d:120ms">
                 <div class="plan-badge">MOST POPULAR</div>
-                <div class="plan-tag">PRO</div>
+                <div class="plan-name">PRO</div>
+                <div class="plan-duration">1 Month</div>
                 <div class="plan-price">₹1,999<span>/mo</span></div>
                 <ul class="plan-perks">
-                    <li>✓ Everything in Basic</li>
+                    <li>✓ Everything in Starter</li>
                     <li>✓ Diet consultation</li>
                     <li>✓ Trainer check-ins</li>
                     <li>✓ Progress tracking</li>
                 </ul>
-                <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}%20(Pro%20Plan)"
-                   class="btn-plan btn-plan-featured" target="_blank">Book Free Trial on WhatsApp</a>
+                <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%27m%20interested%20in%20the%20Pro%20Plan%20at%20{{ gym_name | urlencode }}"
+                   class="btn-plan btn-plan-featured" target="_blank">Get Started</a>
             </div>
-            <div class="plan">
-                <div class="plan-tag">ELITE</div>
+            <!-- ELITE -->
+            <div class="plan-card aos-fade-up" style="--d:240ms">
+                <div class="plan-name">ELITE</div>
+                <div class="plan-duration">1 Month</div>
                 <div class="plan-price">₹3,999<span>/mo</span></div>
                 <ul class="plan-perks">
                     <li>✓ Personal trainer</li>
                     <li>✓ Custom meal plan</li>
-                    <li>✓ Weekly check-ins</li>
-                    <li>✓ Body composition</li>
+                    <li>✓ Physiotherapy access</li>
+                    <li>✓ Body composition report</li>
                 </ul>
-                <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}%20(Elite%20Plan)"
-                   class="btn-plan" target="_blank">Book Free Trial on WhatsApp</a>
+                <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%27m%20interested%20in%20the%20Elite%20Plan%20at%20{{ gym_name | urlencode }}"
+                   class="btn-plan" target="_blank">Get Started</a>
             </div>
         </div>
-        <p class="plans-note">⚡ Only <strong>7 trial slots</strong> left this week</p>
+        <p class="plans-note aos-fade-up">⚡ Free 3-day trial available — no credit card needed</p>
     </div>
 </section>
 
-<!-- FREE TRIAL CTA BLOCK -->
-<section class="lead-section">
+<!-- ===================== FREE TRIAL CTA ===================== -->
+<section class="trial-section">
+    <div class="trial-overlay"></div>
     <div class="container">
-        <div class="lead-box lead-box-centered">
-            <div class="section-label">FREE TRIAL</div>
-            <h2>Try 3 Days. Zero Risk.</h2>
-            <p>No commitment. No contract. Just show up, work out, and decide after.</p>
-            <div class="lead-benefits">
-                <span>✓ Free 3-day trial visit</span>
-                <span>✓ No paperwork</span>
-                <span>✓ Instant WhatsApp reply</span>
+        <div class="trial-box aos-fade-up">
+            <div class="section-eyebrow" style="justify-content:center;display:flex">FREE TRIAL</div>
+            <h2>Try 3 Days. <span class="text-accent">Zero Risk.</span></h2>
+            <p>No commitment. No contract. Just show up, work out and decide after.</p>
+            <div class="trial-chips">
+                <span class="chip">✓ Free 3-day visit</span>
+                <span class="chip">✓ No paperwork</span>
+                <span class="chip">✓ Instant WhatsApp reply</span>
             </div>
             <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}"
-               class="btn-primary" target="_blank" style="margin-top: 28px;">
-                <span class="wa-icon">💬</span> Book Free Trial on WhatsApp (Instant Reply)
+               class="btn-primary" target="_blank" style="margin-top:28px" id="trial-cta">
+                💬 Book Free Trial on WhatsApp
             </a>
-            <p class="cta-note" style="margin-top: 12px;">⚡ Only 7 trial slots left this week</p>
+            <p class="urgency-note">⚡ Only 7 trial slots left this week</p>
         </div>
     </div>
 </section>
 
-<!-- BENEFITS -->
-<section class="benefits-section">
+<!-- ===================== TESTIMONIALS ===================== -->
+<section class="testi-section">
     <div class="container">
-        <div class="section-label">WHY US</div>
-        <h2 class="section-title">Built Different</h2>
-        <div class="benefits-grid">
-            <div class="benefit">
-                <div class="benefit-icon">🏋️</div>
-                <h3>Certified Trainers</h3>
-                <p>Every trainer is certified with real experience in body transformation</p>
-            </div>
-            <div class="benefit">
-                <div class="benefit-icon">📊</div>
-                <h3>Progress Tracking</h3>
-                <p>Monthly measurements, photos, and reports so you see real results</p>
-            </div>
-            <div class="benefit">
-                <div class="benefit-icon">🥗</div>
-                <h3>Diet Guidance</h3>
-                <p>Custom meal plans aligned with your fitness goals and budget</p>
-            </div>
-            <div class="benefit">
-                <div class="benefit-icon">⚡</div>
-                <h3>Modern Equipment</h3>
-                <p>Latest machines maintained regularly — no outdated, broken gear</p>
-            </div>
-            <div class="benefit">
-                <div class="benefit-icon">🕐</div>
-                <h3>Flexible Hours</h3>
-                <p>Early mornings to late evenings — fits your college or work schedule</p>
-            </div>
-            <div class="benefit">
-                <div class="benefit-icon">💬</div>
-                <h3>WhatsApp Support</h3>
-                <p>Ask questions anytime. Your trainer replies on WhatsApp directly</p>
-            </div>
+        <div class="section-header aos-fade-up">
+            <div class="section-eyebrow">RESULTS</div>
+            <h2 class="section-title">Real People. <span class="text-accent">Real Results.</span></h2>
         </div>
-    </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials-section">
-    <div class="container">
-        <div class="section-label">RESULTS</div>
-        <h2 class="section-title">Real People. Real Results.</h2>
-        <div class="testimonials">
-            <div class="testi">
+        <div class="testi-grid">
+            <div class="testi-card aos-fade-up" style="--d:0ms">
                 <div class="testi-stars">★★★★★</div>
-                <p>"Lost 9kg in 3 months. The trainers here actually care about your progress. Best decision I made."</p>
+                <p>"Great gym with a very nice environment. The trainer is very supportive and professional. Highly recommend to anyone serious about fitness."</p>
                 <div class="testi-author">
-                    <div class="testi-avatar">RK</div>
+                    <div class="testi-av">RK</div>
                     <div>
                         <strong>Rahul K.</strong>
-                        <span>Lost 9kg • 3 months</span>
+                        <span>Lost 8kg • 3 months</span>
                     </div>
                 </div>
             </div>
-            <div class="testi">
+            <div class="testi-card aos-fade-up" style="--d:100ms">
                 <div class="testi-stars">★★★★★</div>
-                <p>"Gained 5kg muscle in 4 months with their Elite plan. Diet plan + trainer = game changer."</p>
+                <p>"The gym is very clean and has all modern equipment. The physiotherapy facility is a huge bonus — helped recover from my knee injury fast."</p>
                 <div class="testi-author">
-                    <div class="testi-avatar">AS</div>
+                    <div class="testi-av">AS</div>
                     <div>
-                        <strong>Arjun S.</strong>
-                        <span>Gained 5kg muscle • 4 months</span>
-                    </div>
-                </div>
-            </div>
-            <div class="testi">
-                <div class="testi-stars">★★★★★</div>
-                <p>"Joined through WhatsApp, got a reply in minutes. Started next day. No BS, just results."</p>
-                <div class="testi-author">
-                    <div class="testi-avatar">PM</div>
-                    <div>
-                        <strong>Priya M.</strong>
+                        <strong>Anita S.</strong>
                         <span>Member since 2024</span>
                     </div>
                 </div>
             </div>
+            <div class="testi-card aos-fade-up" style="--d:200ms">
+                <div class="testi-stars">★★★★★</div>
+                <p>"Joined on WhatsApp, got instant response and started my trial the very next morning. The owner is super helpful. Best gym in Hasanpura!"</p>
+                <div class="testi-author">
+                    <div class="testi-av">PM</div>
+                    <div>
+                        <strong>Priya M.</strong>
+                        <span>Gained 5kg muscle • 4 months</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="final-cta">
+<!-- ===================== BMI CALCULATOR ===================== -->
+<section class="bmi-section">
     <div class="container">
-        <div class="cta-bg-text">NOW</div>
-        <h2>Stop Waiting.<br>Start Today.</h2>
-        <p>Every day you delay is a day your body doesn't change.</p>
-        <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}"
-           class="btn-primary btn-large" target="_blank">
-            💬 Book Free Trial on WhatsApp (Instant Reply)
-        </a>
-        <p class="urgency">⚡ Only 7 trial slots left this week</p>
+        <div class="bmi-box aos-fade-up">
+            <div class="section-header" style="text-align:left;margin-bottom:28px">
+                <div class="section-eyebrow">TOOLS</div>
+                <h2 class="section-title" style="margin-bottom:8px">BMI <span class="text-accent">Calculator</span></h2>
+                <p class="section-sub" style="margin-bottom:0">Find out your body mass index instantly.</p>
+            </div>
+            <div class="bmi-form">
+                <div class="bmi-inputs">
+                    <div class="bmi-field">
+                        <label for="bmi-weight">Weight (kg)</label>
+                        <input type="number" id="bmi-weight" placeholder="e.g. 70" min="20" max="300">
+                    </div>
+                    <div class="bmi-field">
+                        <label for="bmi-height">Height (cm)</label>
+                        <input type="number" id="bmi-height" placeholder="e.g. 170" min="100" max="250">
+                    </div>
+                    <button class="btn-primary" id="bmi-btn" onclick="calcBMI()">Calculate</button>
+                </div>
+                <div class="bmi-result" id="bmi-result" style="display:none">
+                    <div class="bmi-score" id="bmi-score"></div>
+                    <div class="bmi-category" id="bmi-category"></div>
+                    <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20checked%20my%20BMI%20and%20want%20a%20fitness%20plan%20at%20{{ gym_name | urlencode }}"
+                       class="btn-ghost" target="_blank" style="margin-top:12px">Get a Custom Plan →</a>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ===================== FINAL CTA ===================== -->
+<section class="final-cta-section">
+    <div class="final-cta-overlay"></div>
+    <div class="cta-bg-word">NOW</div>
+    <div class="container">
+        <div class="final-cta-content aos-fade-up">
+            <h2>Stop Waiting.<br><span class="text-accent">Start Today.</span></h2>
+            <p>Every day you delay is a day your body doesn't change. Your best version is waiting.</p>
+            <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}"
+               class="btn-primary btn-large" target="_blank" id="final-cta">
+                💬 Book Free Trial on WhatsApp
+            </a>
+            <p class="urgency-note" style="margin-top:16px">⚡ Only 7 trial slots left this week</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="contact-section" id="contact">
+    <div class="container">
+        <div class="section-header aos-fade-up">
+            <div class="section-eyebrow">FIND US</div>
+            <h2 class="section-title">Visit <span class="text-accent">{{ gym_name }}</span></h2>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info aos-fade-right">
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <strong>Address</strong>
+                        <p>{{ address }}</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <strong>Phone</strong>
+                        <p><a href="tel:+91{{ whatsapp }}" class="contact-link">{{ phone }}</a></p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">🕐</div>
+                    <div>
+                        <strong>Hours</strong>
+                        <p>Mon – Sat: 6:00 AM – 10:00 PM<br><span style="color:var(--accent)">Sunday: Closed</span></p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">💬</div>
+                    <div>
+                        <strong>WhatsApp</strong>
+                        <p><a href="https://wa.me/{{ whatsapp }}" class="contact-link" target="_blank">+91 {{ phone }}</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="map-embed aos-fade-left">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.6936!2d75.776516!3d26.916625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db5a9fbc5a787%3A0xfe5698b46cc15cb7!2sNatural%20fitness%20gym!5e0!3m2!1sen!2sin!4v1700000000000"
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade" title="Natural Fitness Gym Location">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
 <footer class="footer">
     <div class="container">
-        <div class="footer-inner">
-            <div class="logo">{{ gym_name | upper }}</div>
-            <p>{{ gym_city }}, India</p>
-            <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="footer-wa">
-                💬 Chat on WhatsApp
-            </a>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo"><span class="logo-icon">⚡</span><span class="logo-text">{{ gym_name_short | upper }}</span></div>
+                <p>Your transformation starts here. Join {{ gym_city }}'s most dedicated fitness community.</p>
+            </div>
+            <div class="footer-links-col">
+                <strong>Quick Links</strong>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#plans">Plans</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-contact-col">
+                <strong>Contact</strong>
+                <span>{{ phone }}</span>
+                <span>Hasanpura, Jaipur</span>
+                <span>Mon–Sat: 6AM – 10PM</span>
+            </div>
+            <div class="footer-cta-col">
+                <strong>Ready to transform?</strong>
+                <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}"
+                   class="btn-cta" target="_blank">Book Free Trial</a>
+                <div class="footer-socials">
+                    <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="social-icon" aria-label="WhatsApp">💬</a>
+                    <a href="tel:+91{{ whatsapp }}" class="social-icon" aria-label="Call">📞</a>
+                </div>
+            </div>
         </div>
-        <p class="footer-copy">© {{ year }} {{ gym_name }}. All rights reserved.</p>
+        <div class="footer-bottom">
+            <p>© {{ year }} {{ gym_name }}. All rights reserved.</p>
+            <p>Kamla Nehru Nagar, Hasanpura, Jaipur, Rajasthan 302006</p>
+        </div>
     </div>
 </footer>
 
-<!-- FLOATING WHATSAPP BUTTON -->
+<!-- Floating WhatsApp -->
 <a href="https://wa.me/{{ whatsapp }}?text=Hi%2C%20I%20want%20to%20book%20a%20free%20trial%20at%20{{ gym_name | urlencode }}"
-   class="wa-float" target="_blank">
-    <span class="wa-float-icon">💬</span>
-    <span class="wa-float-text">Chat on WhatsApp</span>
+   class="wa-fab" target="_blank" id="wa-fab" aria-label="WhatsApp">
+    <span class="wa-fab-icon">💬</span>
+    <span class="wa-fab-text">Book Free Trial</span>
 </a>
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
